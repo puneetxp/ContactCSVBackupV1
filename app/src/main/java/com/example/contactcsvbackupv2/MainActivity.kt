@@ -70,6 +70,17 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
+        val fragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+        fragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_settings -> {
